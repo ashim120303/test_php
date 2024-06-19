@@ -1,3 +1,4 @@
+<?php include "foo.php"?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,42 +23,56 @@
           </div>
           <div class="filter__date"></div>
           <div class="filter__premissions">
-  
+
           </div>
         </div>
-        
+
       </div>
       <div class="user">
+        <?php foreach ($result as $res) { ?>
         <div class="user__item">
           <div class="user__buttons">
-            <a href="edit.html"><img src="img/edit.svg" alt="edit" class="user__icon"></a>
-            <img src="img/trash-red.svg" alt="delete" class="user__icon">
+              <a href="edit.php?id=<?php echo $res->id; ?>"><img src="img/edit.svg" alt="edit" class="user__icon"></a>
+              <img src="img/trash-red.svg" alt="delete" class="user__icon" onclick="openModal('myModal-<?php echo $res->id; ?>')">
+
+              <!-- Модальное окно -->
+              <div id="myModal-<?php echo $res->id; ?>" class="modal">
+                  <div class="modal-content">
+                      <span class="close" onclick="closeModal('myModal-<?php echo $res->id; ?>')">&times;</span>
+                      <p>Вы действительно хотите удалить пользователя <?php echo $res->username; ?>?</p>
+                      <form action="?id=<?php echo $res->id; ?>" method="post">
+                          <input type="hidden" name="id" value="<?php echo $res->id; ?>">
+                          <button type="submit" name="delete" class="modal-button">Удалить</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+            <div class="user__info">
+                id: <?php echo $res->id; ?>
+            </div>
+          <div class="user__info">
+            Логин: <?php echo $res->username; ?>
           </div>
           <div class="user__info">
-            Логин: FF
-          </div>
+            Имя: <?php echo $res->first_name; ?>
+           </div>
           <div class="user__info">
-            Пароль: 1234
-          </div>
+            Фамилия: <?php echo $res->last_name; ?>
+           </div>
           <div class="user__info">
-            Имя: 
-          </div>
+            Пол: <?php echo $res->gender; ?>
+           </div>
           <div class="user__info">
-            Фамилия: 
-          </div>
+            Дата рождения: <?php echo $res->birthdate; ?>
+           </div>
           <div class="user__info">
-            Пол: 
+            Права:
           </div>
-          <div class="user__info">
-            Дата рождения:
-          </div>
-          <div class="user__info">
-            Права: Администратор
-          </div>
-          
         </div>
+        <?php }?>
         </div>
     </main>
   </div>
+  <script src="js/app.js"></script>
 </body>
 </html>

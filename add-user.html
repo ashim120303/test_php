@@ -8,30 +8,40 @@
   <link rel="stylesheet" href="css/add-user.css">
 </head>
 <body>
-<div class="wrapper">
-  <form action="foo.php" method="post" class="form">
-    <p class="form__text">Имя пользователя</p>
-    <input type="text" class="form__input" name="username" required>
-    <p class="form__text">Пароль</p>
-    <input type="password" class="form__input" name="password" required>
-    <p class="form__text">Имя</p>
-    <input type="text" class="form__input" name="first_name" required>
-    <p class="form__text">Фамилия</p>
-    <input type="text" class="form__input" name="last_name" required>
-    <p class="form__text">Пол</p>
-    <div class="form__radio-block">
-      <input type="radio" class="form__input" name="gender" value="male" required>
-      <label for="Male">Male</label>
-    </div>
-    <div class="form__radio-block">
-      <input type="radio" class="form__input" name="gender" value="female" required>
-      <label for="Female">Female</label>
-    </div>
+  <div class="wrapper">
+    <form action="/" method="post" class="form">
+      <p class="form__text">Имя пользователя</p>
+      <input type="text" class="form__input" name="username">
+      <p class="form__text">Пароль</p>
+      <input type="password" class="form__input" name="password">
+      <p class="form__text">Имя</p>
+      <input type="text" class="form__input" name="first_name">
+      <p class="form__text">Фамилия</p>
+      <input type="text" class="form__input" name="last_name">
+      <p class="form__text">Пол</p>
+      <div class="form__radio-block">
+        <input type="radio" class="form__input" name="gender" value="Male">
+        <label for="Male">Male</label>
+      </div>
+      <div class="form__radio-block">
+        <input type="radio" class="form__input" name="gender" value="Female">
+        <label for="Female">Female</label>
+      </div>
 
-    <p class="form__text">Дата рождения</p>
-    <input type="date" class="form__input" name="birthdate" required>
-    <button class="form__button btn" name="add">Добавить</button>
-  </form>
-</div>
+      <p class="form__text">Дата рождения</p>
+      <input type="date" class="form__input" name="birthdate">
+      <p class="form__text">Права</p>
+      <div class="form__radio-block">
+        <input type="radio" class="form__input" name="premission" value="Admin">
+        <label for="Admin">Admin</label>
+      </div>
+      <div class="form__radio-block">
+        <input type="radio" class="form__input" name="premission" value="User">
+        <label for="User">User</label>
+      </div>
+
+      <button class="form__button btn" name="add">Добавить</button>
+    </form>
+  </div>
 </body>
 </html>
