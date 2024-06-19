@@ -72,4 +72,28 @@ if(isset($_POST['delete'])){
     }
 }
 
+// filters
+// Формируем SQL-запрос на основе фильтров
+$sql = "SELECT * FROM user WHERE 1";
+
+if (!empty($_GET['alphabet'])) {
+    $alphabet_order = ($_GET['alphabet'] == 'ASC') ? 'ASC' : 'DESC';
+    $sql .= " ORDER BY username $alphabet_order";
+}
+
+if (!empty($_GET['gender'])) {
+    $gender = $_GET['gender'];
+    $sql .= " AND gender = '$gender'";
+}
+
+if (!empty($_GET['permission'])) {
+    $permission = $_GET['permission'];
+    $sql .= " AND premission = '$permission'";
+}
+
+$sql .= ";"; // Завершаем SQL-запрос
+
+$sql = $pdo->prepare($sql);
+$sql->execute();
+$result = $sql->fetchAll(PDO::FETCH_OBJ);
 ?>

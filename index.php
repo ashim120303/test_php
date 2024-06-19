@@ -17,15 +17,31 @@
     </header>
     <main class="main">
       <div class="filter">
-        <div class="filter__container">
-          <div class="filter__genter">
-
+          <div >
+              <form method="get" action="" class="filter__container">
+                  <div class="filter__item">
+                      <select name="alphabet" id="alphabet" onchange="this.form.submit()">
+                          <option value="" disabled selected hidden>По алфавиту</option>
+                          <option value="ASC">От A до Я</option>
+                          <option value="DESC">От Я до A</option>
+                      </select>
+                  </div>
+                  <div class="filter__item">
+                      <select name="gender" id="gender" onchange="this.form.submit()">
+                          <option value="" disabled selected hidden>По полу</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                      </select>
+                  </div>
+                  <div class="filter__item">
+                      <select name="permission" id="permission" onchange="this.form.submit()">
+                          <option value="" disabled selected hidden>По правам</option>
+                          <option value="User">User</option>
+                          <option value="Admin">Admin</option>
+                      </select>
+                  </div>
+              </form>
           </div>
-          <div class="filter__date"></div>
-          <div class="filter__premissions">
-
-          </div>
-        </div>
 
       </div>
       <div class="user">
