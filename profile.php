@@ -10,7 +10,6 @@
     <div class="profile">
       <div class="profile__text">
         Ваш логин:
-
       </div>
       <div class="profile__text">
         Ваш пароль
