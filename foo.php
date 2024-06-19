@@ -9,11 +9,12 @@ if(isset($_POST['add'])){
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
     $birthdate = $_POST['birthdate'];
+    $premission = $_POST['premission'];
 
-    $sql = "INSERT INTO user (username, password, first_name, last_name, gender, birthdate)
-            VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (username, password, first_name, last_name, gender, birthdate, premission)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
     $query = $pdo->prepare($sql);
-    $query->execute([$username, $password, $first_name, $last_name, $gender, $birthdate]);
+    $query->execute([$username, $password, $first_name, $last_name, $gender, $birthdate, $premission]);
 
     if ($query) {
         header("Location: /");
@@ -26,9 +27,7 @@ if(isset($_POST['add'])){
 $sql = $pdo->prepare("SELECT * FROM user;");
 $sql->execute();
 $result = $sql->fetchAll(PDO::FETCH_OBJ);
-if(!$result) {
-    echo "No users found.";
-}
+
 
 // Update user
 if (isset($_POST['edit'])) {
@@ -38,17 +37,18 @@ if (isset($_POST['edit'])) {
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
     $birthdate = $_POST['birthdate'];
+    $premission = $_POST['premission'];
 
     // Обновление пароля, если он указан
     if (!empty($_POST['new_password'])) {
         $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-        $sql = ("UPDATE user SET username=?, password=?, first_name=?, last_name=?, gender=?, birthdate=? WHERE id=?;");
+        $sql = ("UPDATE user SET username=?, password=?, first_name=?, last_name=?, gender=?, birthdate=?, premission WHERE id=?;");
         $query = $pdo->prepare($sql);
-        $query->execute([$username, $new_password, $first_name, $last_name, $gender, $birthdate, $get_id]);
+        $query->execute([$username, $new_password, $first_name, $last_name, $gender, $birthdate, $premission, $get_id]);
     } else {
-        $sql = ("UPDATE user SET username=?, first_name=?, last_name=?, gender=?, birthdate=? WHERE id=?;");
+        $sql = ("UPDATE user SET username=?, first_name=?, last_name=?, gender=?, birthdate=?, premission=? WHERE id=?;");
         $query = $pdo->prepare($sql);
-        $query->execute([$username, $first_name, $last_name, $gender, $birthdate, $get_id]);
+        $query->execute([$username, $first_name, $last_name, $gender, $birthdate, $premission, $get_id]);
     }
     if ($query) {
         header("Location: /");

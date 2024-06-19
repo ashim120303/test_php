@@ -19,16 +19,13 @@
         $query->execute([$id]);
         $user = $query->fetch(PDO::FETCH_OBJ);
 
-        if (!$user) {
-            die("User not found.");
-        }
-
         // Данные пользователя
         $username = $user->username;
         $first_name = $user->first_name;
         $last_name = $user->last_name;
         $gender = $user->gender;
         $birthdate = $user->birthdate;
+        $premission = $user->premission;
     }
     ?>
 
@@ -43,16 +40,23 @@
         <input type="text" class="form__input" name="last_name" value="<?php echo $last_name; ?>" required>
         <p class="form__text">Пол</p>
         <div class="form__radio-block">
-            <input type="radio" class="form__input" name="gender" value="male" <?php if ($gender === 'male') echo 'checked'; ?> required>
+            <input type="radio" class="form__input" name="gender" value="male" <?php if ($gender === 'Male') echo 'checked'; ?> required>
             <label for="Male">Male</label>
         </div>
         <div class="form__radio-block">
-            <input type="radio" class="form__input" name="gender" value="female" <?php if ($gender === 'female') echo 'checked'; ?> required>
+            <input type="radio" class="form__input" name="gender" value="female" <?php if ($gender === 'Female') echo 'checked'; ?> required>
             <label for="Female">Female</label>
         </div>
-
         <p class="form__text">Дата рождения</p>
         <input type="date" class="form__input" name="birthdate" value="<?php echo $birthdate; ?>" required>
+        <div class="form__radio-block">
+            <input type="radio" class="form__input" name="premission" value="User" <?php if ($premission === 'User') echo 'checked'; ?> required>
+            <label for="Male">User</label>
+        </div>
+        <div class="form__radio-block">
+            <input type="radio" class="form__input" name="premission" value="Admin" <?php if ($premission === 'Admin') echo 'checked'; ?> required>
+            <label for="Female">Admin</label>
+        </div>
         <button class="form__button btn" name="edit">Обновить</button>
     </form>
 </div>

@@ -39,7 +39,7 @@
               <div id="myModal-<?php echo $res->id; ?>" class="modal">
                   <div class="modal-content">
                       <span class="close" onclick="closeModal('myModal-<?php echo $res->id; ?>')">&times;</span>
-                      <p>Вы действительно хотите удалить пользователя <?php echo $res->username; ?>?</p>
+                      <p>Вы действительно хотите удалить пользователя: <?php echo $res->username; ?>?</p>
                       <form action="?id=<?php echo $res->id; ?>" method="post">
                           <input type="hidden" name="id" value="<?php echo $res->id; ?>">
                           <button type="submit" name="delete" class="modal-button">Удалить</button>
@@ -66,7 +66,7 @@
             Дата рождения: <?php echo $res->birthdate; ?>
            </div>
           <div class="user__info">
-            Права:
+            Права: <?php echo $res->premission; ?>
           </div>
         </div>
         <?php }?>
