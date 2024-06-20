@@ -16,35 +16,47 @@
       </div>
     </header>
     <main class="main">
-      <div class="filter">
-          <div >
-              <form method="get" action="" class="filter__container">
-                  <div class="filter__item">
-                      <select name="alphabet" id="alphabet" onchange="this.form.submit()">
-                          <option value="" disabled selected hidden>По алфавиту</option>
-                          <option value="ASC">От A до Я</option>
-                          <option value="DESC">От Я до A</option>
-                      </select>
-                  </div>
-                  <div class="filter__item">
-                      <select name="gender" id="gender" onchange="this.form.submit()">
-                          <option value="" disabled selected hidden>По полу</option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                      </select>
-                  </div>
-                  <div class="filter__item">
-                      <select name="permission" id="permission" onchange="this.form.submit()">
-                          <option value="" disabled selected hidden>По правам</option>
-                          <option value="User">User</option>
-                          <option value="Admin">Admin</option>
-                      </select>
-                  </div>
-              </form>
-          </div>
+        <div class="filter">
+            <form method="get" action="" ">
+            <div class="filter__container">
+                <div class="filter__item">
+                    <select name="alphabet" id="alphabet" onchange="this.form.submit()">
+                        <option value="" disabled selected hidden>По алфавиту</option>
+                        <option value="ASC">От A до Я</option>
+                        <option value="DESC">От Я до A</option>
+                    </select>
+                </div>
+                <div class="filter__item">
+                    <select name="gender" id="gender" onchange="this.form.submit()">
+                        <option value="" disabled selected hidden>По полу</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="filter__item">
+                    <select name="permission" id="permission" onchange="this.form.submit()">
+                        <option value="" disabled selected hidden>По правам</option>
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter__reset">
+                <button type="button" onclick="resetFilters()">Сбросить фильтры</button>
+            </div>
+            </form>
+        </div>
 
-      </div>
-      <div class="user">
+        <script>
+            function resetFilters() {
+                document.getElementById('alphabet').selectedIndex = 0;
+                document.getElementById('gender').selectedIndex = 0;
+                document.getElementById('permission').selectedIndex = 0;
+                window.location.href = window.location.pathname;
+            }
+        </script>
+
+        <div class="user">
         <?php foreach ($result as $res) { ?>
         <div class="user__item">
           <div class="user__buttons">
