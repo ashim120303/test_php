@@ -84,6 +84,9 @@ if (!empty($_GET['birthdate_start'])) {
 if (!empty($_GET['birthdate_end'])) {
     $filters[] = "birthdate <= :birthdate_end";
 }
+if (!empty($_GET['username_search'])) {
+    $filters[] = "username LIKE :username_search";
+}
 if (!empty($_GET['alphabet'])) {
     $alphabet_order = ($_GET['alphabet'] == 'ASC') ? 'ASC' : 'DESC';
     $order_by = " ORDER BY username $alphabet_order";
@@ -110,6 +113,10 @@ if (!empty($_GET['birthdate_start'])) {
 }
 if (!empty($_GET['birthdate_end'])) {
     $query->bindParam(':birthdate_end', $_GET['birthdate_end'], PDO::PARAM_STR);
+}
+if (!empty($_GET['username_search'])) {
+    $username_search = '%' . $_GET['username_search'] . '%';
+    $query->bindParam(':username_search', $username_search, PDO::PARAM_STR);
 }
 
 $query->execute();

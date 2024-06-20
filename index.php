@@ -18,6 +18,10 @@
     <main class="main">
         <div class="filter">
             <form method="get" action="">
+                <div class="filter__item search">
+                    <div for="username_search">Поиск по логину:</div>
+                    <input type="text" name="username_search" id="username_search" placeholder="Введите логин">
+                </div>
                 <div class="filter__container">
                     <div class="filter__item">
                         <select name="alphabet" id="alphabet">
@@ -41,7 +45,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="filter__container">
+                <div class="filter__container date">
                     <div class="filter__item">
                         <label for="birthdate_start">Дата рождения от:</label>
                         <input type="date" name="birthdate_start" id="birthdate_start">
@@ -50,9 +54,6 @@
                         <label for="birthdate_end">Дата рождения до:</label>
                         <input type="date" name="birthdate_end" id="birthdate_end">
                     </div>
-                </div>
-                <div class="filter__container">
-                    ПОИСК
                 </div>
                 <div class="filter__container">
                 <div class="filter__button">
@@ -73,6 +74,7 @@
                 document.getElementById('permission').selectedIndex = 0;
                 document.getElementById('birthdate_start').value = '';
                 document.getElementById('birthdate_end').value = '';
+                document.getElementById('username_search').value = '';
                 window.location.href = window.location.pathname;
             }
         </script>
