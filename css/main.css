@@ -113,7 +113,7 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   height: 100%;
   width: 100%;
 }
-.filter__reset:hover{
+.filter__button:hover{
   background-color: #0a813c;
 }
 
@@ -138,6 +138,37 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
 }
 .user__icon {
   cursor: pointer;
+}
+
+/* PAGINATION STYLES ========================================*/
+
+.pagination{
+}
+.pagination__container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px 0 50px 0;
+}
+.pagination__count{
+  text-align: center;
+
+}
+.pagination__button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 200px;
+  height: 50px;
+  margin-top: 30px;
+  background-color: #27ae60;
+  color: #fff;
+  transition: .3s;
+}
+.pagination__button:hover{
+  background-color: #0a813c;
 }
 
 /* POP UP STYLES ========================================*/

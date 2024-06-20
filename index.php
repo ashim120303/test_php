@@ -124,6 +124,16 @@
         </div>
         <?php }?>
         </div>
+
+        <div class="pagination">
+            <div class="pagination__container">
+                <div class="pagination__count">
+                    <p>Показано записей: </p>
+                    <p>Всего записей: </p>
+                </div>
+                <button class="pagination__button">Показать ещё....</button>
+            </div>
+        </div>
     </main>
   </div>
   <script src="js/app.js"></script>
