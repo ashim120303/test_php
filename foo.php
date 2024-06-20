@@ -23,12 +23,6 @@ if(isset($_POST['add'])){
     }
 }
 
-// Read user from db;
-$sql = $pdo->prepare("SELECT * FROM user;");
-$sql->execute();
-$result = $sql->fetchAll(PDO::FETCH_OBJ);
-
-
 // Update user
 if (isset($_POST['edit'])) {
     $get_id = $_GET['id'];
@@ -74,26 +68,50 @@ if(isset($_POST['delete'])){
 
 // filters
 // Формируем SQL-запрос на основе фильтров
-$sql = "SELECT * FROM user WHERE 1";
+$sql = "SELECT * FROM user WHERE 1=1";
 
-if (!empty($_GET['alphabet'])) {
-    $alphabet_order = ($_GET['alphabet'] == 'ASC') ? 'ASC' : 'DESC';
-    $sql .= " ORDER BY username $alphabet_order";
-}
+$filters = [];
 
 if (!empty($_GET['gender'])) {
-    $gender = $_GET['gender'];
-    $sql .= " AND gender = '$gender'";
+    $filters[] = "gender = :gender";
 }
-
 if (!empty($_GET['permission'])) {
-    $permission = $_GET['permission'];
-    $sql .= " AND premission = '$permission'";
+    $filters[] = "premission = :permission";
+}
+if (!empty($_GET['birthdate_start'])) {
+    $filters[] = "birthdate >= :birthdate_start";
+}
+if (!empty($_GET['birthdate_end'])) {
+    $filters[] = "birthdate <= :birthdate_end";
+}
+if (!empty($_GET['alphabet'])) {
+    $alphabet_order = ($_GET['alphabet'] == 'ASC') ? 'ASC' : 'DESC';
+    $order_by = " ORDER BY username $alphabet_order";
+} else {
+    $order_by = "";
 }
 
-$sql .= ";"; // Завершаем SQL-запрос
+if (count($filters) > 0) {
+    $sql .= " AND " . implode(" AND ", $filters);
+}
 
-$sql = $pdo->prepare($sql);
-$sql->execute();
-$result = $sql->fetchAll(PDO::FETCH_OBJ);
+$sql .= $order_by;
+
+$query = $pdo->prepare($sql);
+
+if (!empty($_GET['gender'])) {
+    $query->bindParam(':gender', $_GET['gender'], PDO::PARAM_STR);
+}
+if (!empty($_GET['permission'])) {
+    $query->bindParam(':permission', $_GET['permission'], PDO::PARAM_STR);
+}
+if (!empty($_GET['birthdate_start'])) {
+    $query->bindParam(':birthdate_start', $_GET['birthdate_start'], PDO::PARAM_STR);
+}
+if (!empty($_GET['birthdate_end'])) {
+    $query->bindParam(':birthdate_end', $_GET['birthdate_end'], PDO::PARAM_STR);
+}
+
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_OBJ);
 ?>

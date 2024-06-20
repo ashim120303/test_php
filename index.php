@@ -17,33 +17,52 @@
     </header>
     <main class="main">
         <div class="filter">
-            <form method="get" action="" ">
-            <div class="filter__container">
-                <div class="filter__item">
-                    <select name="alphabet" id="alphabet" onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>По алфавиту</option>
-                        <option value="ASC">От A до Я</option>
-                        <option value="DESC">От Я до A</option>
-                    </select>
+            <form method="get" action="">
+                <div class="filter__container">
+                    <div class="filter__item">
+                        <select name="alphabet" id="alphabet">
+                            <option value="" disabled selected hidden>По алфавиту</option>
+                            <option value="ASC">От A до Я</option>
+                            <option value="DESC">От Я до A</option>
+                        </select>
+                    </div>
+                    <div class="filter__item">
+                        <select name="gender" id="gender">
+                            <option value="" disabled selected hidden>По полу</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="filter__item">
+                        <select name="permission" id="permission">
+                            <option value="" disabled selected hidden>По правам</option>
+                            <option value="User">User</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="filter__item">
-                    <select name="gender" id="gender" onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>По полу</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
+                <div class="filter__container">
+                    <div class="filter__item">
+                        <label for="birthdate_start">Дата рождения от:</label>
+                        <input type="date" name="birthdate_start" id="birthdate_start">
+                    </div>
+                    <div class="filter__item">
+                        <label for="birthdate_end">Дата рождения до:</label>
+                        <input type="date" name="birthdate_end" id="birthdate_end">
+                    </div>
                 </div>
-                <div class="filter__item">
-                    <select name="permission" id="permission" onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>По правам</option>
-                        <option value="User">User</option>
-                        <option value="Admin">Admin</option>
-                    </select>
+                <div class="filter__container">
+                    ПОИСК
                 </div>
-            </div>
-            <div class="filter__reset">
-                <button type="button" onclick="resetFilters()">Сбросить фильтры</button>
-            </div>
+                <div class="filter__container">
+                <div class="filter__button">
+                    <button type="submit">Применить фильтр</button>
+                </div>
+                <div class="filter__button">
+                    <button type="button" onclick="resetFilters()">Сбросить фильтры</button>
+                </div>
+                </div>
+
             </form>
         </div>
 
@@ -52,9 +71,13 @@
                 document.getElementById('alphabet').selectedIndex = 0;
                 document.getElementById('gender').selectedIndex = 0;
                 document.getElementById('permission').selectedIndex = 0;
+                document.getElementById('birthdate_start').value = '';
+                document.getElementById('birthdate_end').value = '';
                 window.location.href = window.location.pathname;
             }
         </script>
+
+
 
         <div class="user">
         <?php foreach ($result as $res) { ?>
