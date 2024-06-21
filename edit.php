@@ -25,11 +25,11 @@
         $last_name = $user->last_name;
         $gender = $user->gender;
         $birthdate = $user->birthdate;
-        $premission = $user->premission;
+        $role = $user->role;
     }
     ?>
 
-    <form action="foo.php?id=<?php echo $id; ?>" method="post" class="form">
+    <form action="foo.php?id=<?php echo htmlspecialchars($id); ?>" method="post" class="form">
         <p class="form__text">Имя пользователя</p>
         <input type="text" class="form__input" name="username" value="<?php echo $username; ?>" required>
         <p class="form__text">Новый пароль</p>
@@ -50,11 +50,11 @@
         <p class="form__text">Дата рождения</p>
         <input type="date" class="form__input" name="birthdate" value="<?php echo $birthdate; ?>" required>
         <div class="form__radio-block">
-            <input type="radio" class="form__input" name="premission" value="User" <?php if ($premission === 'User') echo 'checked'; ?> required>
+            <input type="radio" class="form__input" name="role" value="User" <?php if ($role === 'User') echo 'checked'; ?> required>
             <label for="Male">User</label>
         </div>
         <div class="form__radio-block">
-            <input type="radio" class="form__input" name="premission" value="Admin" <?php if ($premission === 'Admin') echo 'checked'; ?> required>
+            <input type="radio" class="form__input" name="role" value="Admin" <?php if ($role === 'Admin') echo 'checked'; ?> required>
             <label for="Female">Admin</label>
         </div>
         <button class="form__button btn" name="edit">Обновить</button>

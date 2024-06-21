@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div class="filter__item">
-                        <select name="permission" id="permission">
+                        <select name="role" id="role">
                             <option value="" disabled selected hidden>По правам</option>
                             <option value="User">User</option>
                             <option value="Admin">Admin</option>
@@ -71,7 +71,7 @@
             function resetFilters() {
                 document.getElementById('alphabet').selectedIndex = 0;
                 document.getElementById('gender').selectedIndex = 0;
-                document.getElementById('permission').selectedIndex = 0;
+                document.getElementById('role').selectedIndex = 0;
                 document.getElementById('birthdate_start').value = '';
                 document.getElementById('birthdate_end').value = '';
                 document.getElementById('username_search').value = '';
@@ -119,7 +119,7 @@
             Дата рождения: <?php echo $res->birthdate; ?>
            </div>
           <div class="user__info">
-            Права: <?php echo $res->premission; ?>
+            Права: <?php echo $res->role; ?>
           </div>
         </div>
         <?php }?>

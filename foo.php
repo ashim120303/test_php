@@ -9,12 +9,12 @@ if(isset($_POST['add'])){
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
     $birthdate = $_POST['birthdate'];
-    $premission = $_POST['premission'];
+    $role = $_POST['role'];
 
-    $sql = "INSERT INTO user (username, password, first_name, last_name, gender, birthdate, premission)
+    $sql = "INSERT INTO user (username, password, first_name, last_name, gender, birthdate, role)
             VALUES (?, ?, ?, ?, ?, ?, ?)";
     $query = $pdo->prepare($sql);
-    $query->execute([$username, $password, $first_name, $last_name, $gender, $birthdate, $premission]);
+    $query->execute([$username, $password, $first_name, $last_name, $gender, $birthdate, $role]);
 
     if ($query) {
         header("Location: /");
@@ -31,23 +31,36 @@ if (isset($_POST['edit'])) {
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
     $birthdate = $_POST['birthdate'];
-    $premission = $_POST['premission'];
+    $role = $_POST['role'];
+
+    // Отладочная информация
+    echo "ID: " . htmlspecialchars($get_id) . "<br>";
+    echo "Username: " . htmlspecialchars($username) . "<br>";
+    echo "First Name: " . htmlspecialchars($first_name) . "<br>";
+    echo "Last Name: " . htmlspecialchars($last_name) . "<br>";
+    echo "Gender: " . htmlspecialchars($gender) . "<br>";
+    echo "Birthdate: " . htmlspecialchars($birthdate) . "<br>";
+    echo "Role: " . htmlspecialchars($role) . "<br>";
+    if (!empty($_POST['new_password'])) {
+        echo "New Password is set<br>";
+    }
 
     // Обновление пароля, если он указан
     if (!empty($_POST['new_password'])) {
         $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-        $sql = ("UPDATE user SET username=?, password=?, first_name=?, last_name=?, gender=?, birthdate=?, premission WHERE id=?;");
+        $sql = "UPDATE user SET username=?, password=?, first_name=?, last_name=?, gender=?, birthdate=?, role=? WHERE id=?;";
         $query = $pdo->prepare($sql);
-        $query->execute([$username, $new_password, $first_name, $last_name, $gender, $birthdate, $premission, $get_id]);
+        $result = $query->execute([$username, $new_password, $first_name, $last_name, $gender, $birthdate, $role, $get_id]);
     } else {
-        $sql = ("UPDATE user SET username=?, first_name=?, last_name=?, gender=?, birthdate=?, premission=? WHERE id=?;");
+        $sql = "UPDATE user SET username=?, first_name=?, last_name=?, gender=?, birthdate=?, role=? WHERE id=?;";
         $query = $pdo->prepare($sql);
-        $query->execute([$username, $first_name, $last_name, $gender, $birthdate, $premission, $get_id]);
+        $result = $query->execute([$username, $first_name, $last_name, $gender, $birthdate, $role, $get_id]);
     }
-    if ($query) {
+
+    if ($result) {
         header("Location: /");
     } else {
-        echo "Error to update user in db.";
+        echo "Error updating user in db.";
     }
 }
 
@@ -75,8 +88,8 @@ $filters = [];
 if (!empty($_GET['gender'])) {
     $filters[] = "gender = :gender";
 }
-if (!empty($_GET['permission'])) {
-    $filters[] = "premission = :permission";
+if (!empty($_GET['role'])) {
+    $filters[] = "role = :role";
 }
 if (!empty($_GET['birthdate_start'])) {
     $filters[] = "birthdate >= :birthdate_start";
@@ -105,8 +118,8 @@ $query = $pdo->prepare($sql);
 if (!empty($_GET['gender'])) {
     $query->bindParam(':gender', $_GET['gender'], PDO::PARAM_STR);
 }
-if (!empty($_GET['permission'])) {
-    $query->bindParam(':permission', $_GET['permission'], PDO::PARAM_STR);
+if (!empty($_GET['role'])) {
+    $query->bindParam(':role', $_GET['role'], PDO::PARAM_STR);
 }
 if (!empty($_GET['birthdate_start'])) {
     $query->bindParam(':birthdate_start', $_GET['birthdate_start'], PDO::PARAM_STR);
