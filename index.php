@@ -133,12 +133,12 @@
                     <?php if ($page > 1): ?>
                         <a href="?<?php echo http_build_query(array_merge($_GET, ['page' => $page - 1])); ?>" class="pagination__button">Назад</a>
                     <?php endif; ?>
-                    <?php if ($page < $total_pages): ?>
-                        <a href="?<?php echo http_build_query(array_merge($_GET, ['page' => $page + 1])); ?>" class="pagination__button">Вперёд</a>
-                    <?php endif; ?>
                     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                         <a href="?<?php echo http_build_query(array_merge($_GET, ['page' => $i])); ?>" class="pagination__button <?php echo ($page == $i) ? 'active' : ''; ?>"><?php echo $i; ?></a>
                     <?php endfor; ?>
+                    <?php if ($page < $total_pages): ?>
+                        <a href="?<?php echo http_build_query(array_merge($_GET, ['page' => $page + 1])); ?>" class="pagination__button">Вперёд</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

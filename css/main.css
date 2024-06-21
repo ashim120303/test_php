@@ -173,9 +173,8 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   background-color: #0a813c;
 }
 .pagination__button.active {
-  background-color: #007bff; /* Новый цвет для активной кнопки */
+  background-color: #0a813c; /* Новый цвет для активной кнопки */
   color: #fff;
-  border: 1px solid #0056b3; /* Опционально: добавление границы для активной кнопки */
 }
 
 /* POP UP STYLES ========================================*/
