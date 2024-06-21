@@ -78,11 +78,13 @@ if(isset($_POST['delete'])){
         echo "Error to delete user from db.";
     }
 }
+// Pagination parameters
+$records_per_page = 10; // Number of records per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $records_per_page;
 
-// filters
-// Формируем SQL-запрос на основе фильтров
+// Filters
 $sql = "SELECT * FROM user WHERE 1=1";
-
 $filters = [];
 
 if (!empty($_GET['gender'])) {
@@ -111,7 +113,10 @@ if (count($filters) > 0) {
     $sql .= " AND " . implode(" AND ", $filters);
 }
 
-$sql .= $order_by;
+// Query to get the total number of records
+$total_sql = $sql;
+
+$sql .= $order_by . " LIMIT :limit OFFSET :offset";
 
 $query = $pdo->prepare($sql);
 
@@ -131,7 +136,32 @@ if (!empty($_GET['username_search'])) {
     $username_search = '%' . $_GET['username_search'] . '%';
     $query->bindParam(':username_search', $username_search, PDO::PARAM_STR);
 }
+$query->bindParam(':limit', $records_per_page, PDO::PARAM_INT);
+$query->bindParam(':offset', $offset, PDO::PARAM_INT);
 
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+// Get the total number of records for pagination
+$total_query = $pdo->prepare($total_sql);
+if (!empty($_GET['gender'])) {
+    $total_query->bindParam(':gender', $_GET['gender'], PDO::PARAM_STR);
+}
+if (!empty($_GET['role'])) {
+    $total_query->bindParam(':role', $_GET['role'], PDO::PARAM_STR);
+}
+if (!empty($_GET['birthdate_start'])) {
+    $total_query->bindParam(':birthdate_start', $_GET['birthdate_start'], PDO::PARAM_STR);
+}
+if (!empty($_GET['birthdate_end'])) {
+    $total_query->bindParam(':birthdate_end', $_GET['birthdate_end'], PDO::PARAM_STR);
+}
+if (!empty($_GET['username_search'])) {
+    $username_search = '%' . $_GET['username_search'] . '%';
+    $total_query->bindParam(':username_search', $username_search, PDO::PARAM_STR);
+}
+$total_query->execute();
+$total_records = $total_query->rowCount();
+$total_pages = ceil($total_records / $records_per_page);
+
 ?>
