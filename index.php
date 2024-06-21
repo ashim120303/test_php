@@ -136,7 +136,9 @@
                     <?php if ($page < $total_pages): ?>
                         <a href="?<?php echo http_build_query(array_merge($_GET, ['page' => $page + 1])); ?>" class="pagination__button">Вперёд</a>
                     <?php endif; ?>
-                    <div class="pagination__page"><?php echo $page; ?></div>
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <a href="?<?php echo http_build_query(array_merge($_GET, ['page' => $i])); ?>" class="pagination__button <?php echo ($page == $i) ? 'active' : ''; ?>"><?php echo $i; ?></a>
+                    <?php endfor; ?>
                 </div>
             </div>
         </div>

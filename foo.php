@@ -78,6 +78,8 @@ if(isset($_POST['delete'])){
         echo "Error to delete user from db.";
     }
 }
+
+
 // Pagination parameters
 $records_per_page = 10; // Number of records per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
