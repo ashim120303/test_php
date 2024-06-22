@@ -1,5 +1,11 @@
 <?php
+require 'session.php'; // Подключаем проверку сессии
 include 'db.php';
+
+// Проверка роли пользователя
+if ($_SESSION['role'] !== 'Admin') {
+    die('Доступ запрещен: недостаточно прав.');
+}
 
 // Send user to db
 if(isset($_POST['add'])){

@@ -1,3 +1,23 @@
+<?php
+session_start(); // Обязательно начинаем сессию в начале файла
+
+// Проверяем, авторизован ли пользователь
+if (!isset($_SESSION['user_id'])) {
+    // Если не авторизован, перенаправляем на страницу авторизации
+    header('Location: login.html');
+    exit();
+}
+
+// Обработка выхода (logout)
+if (isset($_POST['logout'])) {
+    // Очищаем сессионные переменные
+    session_unset();
+    session_destroy();
+    // Перенаправляем на страницу авторизации после выхода
+    header('Location: login.html');
+    exit();
+}
+?>
 <?php include "foo.php"?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +31,10 @@
 <div class="wrapper">
     <header class="header">
         <div class="header__container">
-            <a href="auth.html"><div class="header__item">Выход</div></a>
-            <a href="add-user.html" class="header__item">Добавить пользоватля</a>
+            <form method="post" action="">
+                <button type="submit" name="logout" class="header__item">Logout</button>
+            </form>
+            <a href="add-user.php" class="header__item">Добавить пользоватля</a>
         </div>
     </header>
     <main class="main">

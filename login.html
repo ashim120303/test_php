@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authtorization</title>
+  <title>Authorization</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-  <div class="wrapper">
-    <form action="/" method="post" class="form">
-      <p class="form__text">Имя пользователя</p>
-      <input type="text" class="form__input">
-      <p class="form__text">Пароль</p>
-      <input type="password" class="form__input">
+<div class="wrapper">
+  <form action="login.php" method="post" class="form">
+    <p class="form__text">Имя пользователя</p>
+    <input type="text" name="username" class="form__input" required>
+    <p class="form__text">Пароль</p>
+    <input type="password" name="password" class="form__input" required>
 
-      <button class="form__button btn">Войти</>
-    </form>
-  </div>
+    <button type="submit" class="form__button btn">Войти</button>
+  </form>
+</div>
 </body>
 </html>
