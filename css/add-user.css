@@ -28,8 +28,6 @@
 .form__text:focus{
   text-decoration: none;
 }
-
-
 .form__radio-block{
   display: flex;
 }
@@ -39,7 +37,6 @@
   display: block;
   margin-top: 3px;
 }
-
 .form__button {
   width: 100%;
   height: 35px;

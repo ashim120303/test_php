@@ -89,18 +89,6 @@ if (isset($_POST['logout'])) {
             </form>
         </div>
 
-        <script>
-            function resetFilters() {
-                document.getElementById('alphabet').selectedIndex = 0;
-                document.getElementById('gender').selectedIndex = 0;
-                document.getElementById('role').selectedIndex = 0;
-                document.getElementById('birthdate_start').value = '';
-                document.getElementById('birthdate_end').value = '';
-                document.getElementById('username_search').value = '';
-                window.location.href = window.location.pathname;
-            }
-        </script>
-
         <div class="user">
             <?php foreach ($result as $res) { ?>
                 <div class="user__item">

@@ -11,19 +11,19 @@
 <body>
 <div class="wrapper">
     <form action="foo.php" method="post" class="form">
-        <p class="form__text">Имя пользователя</p>
+        <p class="form__text">Username</p>
         <input type="text" class="form__input" name="username" required>
 
-        <p class="form__text">Пароль</p>
+        <p class="form__text">Password</p>
         <input type="password" class="form__input" name="password" required>
 
-        <p class="form__text">Имя</p>
+        <p class="form__text">First Name</p>
         <input type="text" class="form__input" name="first_name" required>
 
-        <p class="form__text">Фамилия</p>
+        <p class="form__text">Last Name</p>
         <input type="text" class="form__input" name="last_name" required>
 
-        <p class="form__text">Пол</p>
+        <p class="form__text">Gender</p>
         <div class="form__radio-block">
             <input type="radio" id="male" class="form__input" name="gender" value="Male" required>
             <label for="male">Male</label>
@@ -33,10 +33,10 @@
             <label for="female">Female</label>
         </div>
 
-        <p class="form__text">Дата рождения</p>
+        <p class="form__text">Birthdate</p>
         <input type="date" class="form__input" name="birthdate" required>
 
-        <p class="form__text">Права</p>
+        <p class="form__text">Role</p>
         <div class="form__radio-block">
             <input type="radio" id="admin" class="form__input" name="role" value="Admin" required>
             <label for="admin">Admin</label>
