@@ -1,0 +1,53 @@
+Made by Ashim!
+Github: ashim120303
+Gmail: ashim030312@gmail.com
+Phone: +996 706 704 800
+
+To complete the task, I used the Apache2 web server, php 8.3.6, mysql-server, html, css, js
+
+Instructions for launching a website on Linux Ubuntu:
+1. Place the site on the path: /var/www/
+
+2. Set the correct directory access rights:
+	sudo chown -R $USER:$USER /var/www/test_php
+	sudo chmod -R 755 /var/www
+	
+3. Create a virtual host configuration file for the site:
+	sudo nano /etc/apache2/sites-available/test_php.conf
+	
+4. Add the following content to the test_php.conf file:
+	<VirtualHost *:80>
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/test_php
+		ServerName test_php.local
+
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+	</VirtualHost>
+
+5. Activate the new virtual host:
+	sudo a2ensite test_php.conf
+	
+6. Open the hosts file:
+	sudo nano /etc/hosts
+	
+7. Add the following line to the file:
+	127.0.0.1 test_php.local
+	
+8. Restart Apache2 to apply the changes: 
+	sudo service apache2 restart 
+
+9. Create a database and enter the data using the commands from the file: user_management.sql
+
+10. Create a user and give him permission to the database:
+	CREATE USER 'php_user'@'localhost' IDENTIFIED BY '123';
+	GRANT ALL PRIVILEGES ON user_management.* TO 'php_user'@'localhost';
+	FLUSH PRIVILEGES;
+
+11. Open the website on the way: http://test_php.local/
+
+12. To log in, enter username: admin and password: 123
+
+
+
+Thank you for an interesting and useful task, sincerely, Ashim!
