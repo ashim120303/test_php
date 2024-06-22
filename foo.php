@@ -1,16 +1,16 @@
 <?php
-require 'session.php'; // Подключаем проверку сессии
-include 'db.php';
+require 'session.php'; // Including session validation
+include 'db.php'; // Including database connection
 
-// Проверка роли пользователя
+// Check user role
 if ($_SESSION['role'] !== 'Admin') {
-    die('Доступ запрещен: недостаточно прав.');
+    die('Access denied: insufficient privileges.');
 }
 
-// Send user to db
+// Add new user
 if(isset($_POST['add'])){
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Хэширование пароля
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hashing the password
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
@@ -25,11 +25,11 @@ if(isset($_POST['add'])){
     if ($query) {
         header("Location: /");
     } else {
-        echo "Error to send user to db.";
+        echo "Error inserting user into database.";
     }
 }
 
-// Update user
+// Update user information
 if (isset($_POST['edit'])) {
     $get_id = $_GET['id'];
     $username = $_POST['username'];
@@ -39,7 +39,7 @@ if (isset($_POST['edit'])) {
     $birthdate = $_POST['birthdate'];
     $role = $_POST['role'];
 
-    // Отладочная информация
+    // Debug information
     echo "ID: " . htmlspecialchars($get_id) . "<br>";
     echo "Username: " . htmlspecialchars($username) . "<br>";
     echo "First Name: " . htmlspecialchars($first_name) . "<br>";
@@ -51,7 +51,7 @@ if (isset($_POST['edit'])) {
         echo "New Password is set<br>";
     }
 
-    // Обновление пароля, если он указан
+    // Update password if provided
     if (!empty($_POST['new_password'])) {
         $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
         $sql = "UPDATE user SET username=?, password=?, first_name=?, last_name=?, gender=?, birthdate=?, role=? WHERE id=?;";
@@ -66,25 +66,24 @@ if (isset($_POST['edit'])) {
     if ($result) {
         header("Location: /");
     } else {
-        echo "Error updating user in db.";
+        echo "Error updating user in database.";
     }
 }
 
 // Delete user
 if(isset($_POST['delete'])){
-    $get_id = $_POST['id']; // Получаем id пользователя из формы
+    $get_id = $_POST['id']; // Get user ID from form
     $sql = "DELETE FROM user WHERE id = ?";
     $query = $pdo->prepare($sql);
     $query->execute([$get_id]);
 
     if ($query) {
         header("Location: /");
-        exit; // Важно завершить скрипт после перенаправления
+        exit; // Important to terminate script after redirection
     } else {
-        echo "Error to delete user from db.";
+        echo "Error deleting user from database.";
     }
 }
-
 
 // Pagination parameters
 $records_per_page = 10; // Number of records per page
@@ -121,7 +120,7 @@ if (count($filters) > 0) {
     $sql .= " AND " . implode(" AND ", $filters);
 }
 
-// Query to get the total number of records
+// Query to get total number of records
 $total_sql = $sql;
 
 $sql .= $order_by . " LIMIT :limit OFFSET :offset";
@@ -150,7 +149,7 @@ $query->bindParam(':offset', $offset, PDO::PARAM_INT);
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_OBJ);
 
-// Get the total number of records for pagination
+// Get total number of records for pagination
 $total_query = $pdo->prepare($total_sql);
 if (!empty($_GET['gender'])) {
     $total_query->bindParam(':gender', $_GET['gender'], PDO::PARAM_STR);

@@ -1,12 +1,13 @@
 <?php
 session_start();
-require 'db.php'; // Файл с подключением к базе данных
+require 'db.php'; // File with database connection
 
+// Handle POST request for login
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Подготовка SQL запроса для выборки данных о пользователе
+    // Prepare SQL query to fetch user data
     $sql = "SELECT id, username, password, role, first_name FROM user WHERE username = :username";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
@@ -14,24 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        // Пользователь найден, проверяем пароль
+        // User found, verify password
         if (password_verify($password, $user['password'])) {
-            // Пароль верный, устанавливаем сессионные переменные
+            // Password correct, set session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['first_name'] = $user['first_name'];
 
-            // Перенаправляем на главную страницу после успешной авторизации
+            // Redirect to the main page after successful login
             header('Location: index.php');
             exit();
         } else {
-            // Неверный пароль
-            echo 'Неправильный пароль';
+            // Incorrect password
+            echo 'Incorrect password';
         }
     } else {
-        // Пользователь не найден
-        echo 'Пользователь не найден';
+        // User not found
+        echo 'User not found';
     }
 }
 ?>
