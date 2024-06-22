@@ -44,3 +44,9 @@
   background-color: rgb(8, 101, 8);
   margin-top: 10px;
 }
+
+@media (max-width: 865px) {
+  .form{
+    width: 90%;
+  }
+}

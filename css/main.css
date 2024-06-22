@@ -11,13 +11,7 @@ button {font: inherit;color: inherit;cursor: pointer;background-color: transpare
 body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #ccc;}
 .wrapper {min-height: 100%;overflow: clip;display: flex;flex-direction: column;}
 
-/* FORM STYLES ========================================*/
-
-
 /* HEADER STYLES ========================================*/
-.header {
-
-}
 .header__container{
   height: 70px;
   display: flex;
@@ -26,11 +20,8 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   background-color: #b2aeae;
   padding: 0 30px;
 }
-.header__item {
-}
 
-
-/* ADMIN STYLES ========================================*/
+/* FILTER STYLES ========================================*/
 .filter {
   padding: 40px 40px 30px 40px;
 }
@@ -39,12 +30,10 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   justify-content: space-between;
   padding: 10px;
 }
-
 .filter__item {
   flex: 1;
   margin-right: 10px;
 }
-
 .filter__item select {
   width: 100%;
   padding: 5px;
@@ -96,7 +85,7 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   background-color: #0a813c;
 }
 
-
+/* USER STYLES ========================================*/
 .user{
   display: grid;
   grid-template-columns: repeat(2, auto); 
@@ -118,7 +107,6 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
 }
 
 /* PAGINATION STYLES ========================================*/
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -167,7 +155,6 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
@@ -197,4 +184,38 @@ body {font-family: sans-serif;font-size: 16px;color: #000; background-color: #cc
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* RESPONSE STYLES ========================================*/
+@media (max-width: 767px) {
+  .filter__container{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .filter__item {
+    min-width: 400px;
+  }
+  .filter__button{
+    margin-top: 0;
+  }
+  .user{
+    grid-template-columns: repeat(1, auto);
+  }
+}
+@media (max-width: 475px) {
+  .filter__item {
+    min-width: 100%;
+    margin: 0;
+  }
+  .filter__item input {
+    max-width: 100%;
+  }
+  .date .filter__item{
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .modal-content {
+    width: 300px;
+  }
 }
